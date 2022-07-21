@@ -1,0 +1,38 @@
+{
+  "name": "load_test_privy",
+  "version": "1.0.0",
+  "description": "just read me\r added webhook jenkins-gitlab trial\r only\r QA Test",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tkrobby/stress_test_privy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "core-js": "^3.19.1",
+    "k6": "0.0.0",
+    "supertest": "^6.1.6",
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.9.1",
+    "write-json-file": "^5.0.0"
+  },
+  "dependencies": {}
+}
+{
+  "name": "bundling-example",
+  "description": "",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+  "bundle": "webpack"
+  }
+}
