@@ -1,27 +1,35 @@
 import http from 'k6/http';
+import { FormData } from 'https://jslib.k6.io/formdata/0.0.2/index.js';
 import { group, check } from 'k6';
 import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
+import papaparse from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
+import { SharedArray } from 'k6/data';
 
 
-let user_id = '229d4c5d-6854-4360-924d-b79c4f2149af'
 let base_url = 'http://pretest-qa.dcidev.id'
-let endpoint =  base_url + `/api/v1/message/${user_id}`;
+let endpoint =  base_url + '/api/v1/profile/me';
 
 export function handleSummary(data) {
     return {
-      'get_message/summary.html': htmlReport(data),
+      'get_profile/summary.html': htmlReport(data),
     };
 };
 
 export const options = {
     stages: [
-      { duration: "2s", target: 1 },
+      { duration: "10s", target: 10 },
     //   { duration: "30s", target: 10 },
     //   { duration: "1m", target: 10 },
     //   { duration: "30s", target: 5 },
     //   { duration: "30s", target: 0 },
     ],
 };
+
+const csvRead = new SharedArray("transaction date", function () {
+    return papaparse.parse(open('./data/data.csv'),{header: true}).data;
+})
+
+var param_phone_login = csvRead[Math.floor(Math.random() * csvRead.length)]['phone'];
 
 export function login(param_phone, password) {
     let headers = {
@@ -46,7 +54,7 @@ export function login(param_phone, password) {
 }
 
 export default function () {
-    const token = login('6289180101312', '123123');
+    const token = login(param_phone_login, '123123');
     group('get message', function () {
         let headers = {
             'content-type': 'application/x-www-form-urlencoded',
