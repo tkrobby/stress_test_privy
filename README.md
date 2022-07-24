@@ -1,5 +1,5 @@
 # stress_test_privy
-Result stress test for privy
+Result stress test for privy, this stress test script uses k6.
 
 ## for running
 k6 run folder_module/file.js
